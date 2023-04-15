@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.pikachoong.AutoCompleteParse;
+import com.example.pikachoong.Navigate;
 import com.example.pikachoong.Path;
 import com.example.pikachoong.R;
 import com.example.pikachoong.RecyclerViewAdapter;
@@ -58,6 +59,7 @@ public class Navi_Impossible extends AppCompatActivity implements TMapGpsManager
     private ArrayList<Poi> p;
 
 
+
     public void onLocationChange(Location location){
         //onLocationChange함수는 일반 메서드보다 호출 순서가 조금 느림 -> onLocationChange를 먼저 수행한 후
         // navigate()함수를 실행하도록 하여야 변수 값의 혼동이 없을 듯.
@@ -83,8 +85,13 @@ public class Navi_Impossible extends AppCompatActivity implements TMapGpsManager
         setContentView(R.layout.activity_navi_imposs);
 
         Map();
+        Stations stations = new Stations();
+        ArrayList<TMapPoint> TMP = stations.Chargestation();
     }
 
+    public void method(){
+        Stations st = new Stations();
+    }
     public void Map(){
         mContext = this;
 

@@ -25,10 +25,6 @@ import android.widget.EditText;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
 
 public class MainActivity extends AppCompatActivity implements TMapGpsManager.onLocationChangedCallback{
 

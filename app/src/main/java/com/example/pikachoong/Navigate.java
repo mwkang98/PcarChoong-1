@@ -130,6 +130,10 @@ public class Navigate extends AppCompatActivity implements TMapGpsManager.onLoca
         tmapview.setZoomLevel(12);
     }
 
+    public Navigate obj(){
+        return this;
+    }
+
     public void judgement_algor(){
         Intent intent = getIntent();
         ArrayList<String> infor = (ArrayList<String>) intent.getSerializableExtra("information");// 객체를 받아옴
