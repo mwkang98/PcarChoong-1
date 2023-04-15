@@ -1,7 +1,6 @@
 package com.example.pikachoong.charge;
 
 import com.example.pikachoong.Navigate;
-import com.example.pikachoong.charge_entities.StationEntity_Res;
 import com.skt.Tmap.TMapPoint;
 
 import java.io.BufferedReader;
@@ -38,23 +37,19 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 class charging_station{
-    String statName;
-    String stationID;
-    String address;
-    String location, lat, lng, usetime, busild, stat, output;
+    String statName,stationID,address, location, lat, lng, usetime, stat, output;
 }
 public class Stations {
     private final String DataKey= "UhKarman7DgUATAB4EIurxt5ch40fMqqTm8MWt3CX%2Bna3%2BYttYFbg%2FayLNVgMB6%2FCXEITNP%2B36laZcUqY5wYDA%3D%3D";
     private StringBuilder urlBuilder;
     private String station_addr;
     private Navigate navi;
-    private StationEntity_Res stations;
-    public ArrayList<TMapPoint> list;
     private Navigate N;
 
     charging_station cs;
+    ArrayList<charging_station> list = new ArrayList<charging_station> ();
 
-    public ArrayList<TMapPoint> Chargestation() throws IOException {
+    public ArrayList<charging_station> get_charge_station() throws IOException {
 
         navi = N.obj();
         for(int i=0;i<navi.p.size();i++){
@@ -65,7 +60,7 @@ public class Stations {
 
 
 
-        ///검색해서 따온 XML 파싱 시작할거임
+        ///검색해서 따온 XML 파싱 시작할거
 
 
 
@@ -101,36 +96,45 @@ public class Stations {
                             cs= new charging_station();
                         }
 
-                        if(parser.getName().equals("statNm") {
+                        if(parser.getName().equals("statNm"))
+                        {
                             instatNm= true;
                     }
-                    if(parser.getName().equals("statId"){
+                    if(parser.getName().equals("statId"))
+                    {
                         instatId= true;
                     }
 
-                    if(parser.getName().equals("addr"){
+                    if(parser.getName().equals("addr"))
+                    {
                         inaddr= true;
                     }
-                    if(parser.getName().equals("location"){
+                    if(parser.getName().equals("location"))
+                    {
                         inlocation= true;
                     }
-                    if(parser.getName().equals("lat")
+                    if(parser.getName().equals("lat"))
                         {
                         inlat= true;
                     }
-                    if(parser.getName().equals("lng"){
+                    if(parser.getName().equals("lng"))
+                        {
                         inlng= true;
                     }
-                    if(parser.getName().equals("useTime"){
+                    if(parser.getName().equals("useTime"))
+                    {
                         inuseTime= true;
                     }
-                    if(parser.getName().equals("stat"){
+                    if(parser.getName().equals("stat"))
+                    {
                         instat= true;
                     }
-                    if(parser.getName().equals("output"){
+                    if(parser.getName().equals("output"))
+                    {
                         inoutput= true;
                     }
-                    if(parser.getName().equals("message")){ //message 태그를 만나면 에러 출력
+                    if(parser.getName().equals("message"))
+                    { //message 태그를 만나면 에러 출력
                         System.out.println("xml 데이터 불러오기 실패!");
                     }
                     break;
@@ -151,49 +155,53 @@ public class Stations {
                         if(inaddr)
                         {
                             addr=parser.getText();
-                            cs.stationID
+                            cs.address=addr;
                             inaddr=false;
                         }
                         if(inlocation)
                         {
                             location=parser.getText();
-                            station.add(3,location);
+                            cs.location=location;
                             inlocation=false;
                         }
                         if(inlat)
                         {
                             lat=parser.getText();
-                            station.add(4,lat);
+                            cs.lat=lat;
                             inlat=false;
                         }
                         if(inlng)
                         {
                             lng=parser.getText();
-                            station.add(5,lng);
+                            cs.lng=lng;
                             inlng=false;
                         }
                         if(inuseTime)
                         {
                             useTime=parser.getText();
-                            station.add(6,useTime);
+                            cs.usetime=useTime;
                             inuseTime=false;
                         }
                         if(instat)
                         {
                             stat=parser.getText();
-                            station.add(7,stat);
+                            cs.stat=stat;
                             instat=false;
                         }
                         if(inoutput)
                         {
                             output=parser.getText();
+                            cs.output=output;
                             inoutput=false;
                         }
                         break;
 
                     case XmlPullParser.END_TAG:
                     {
-
+                        if(parser.getName().equals("item"))
+                        {
+                            list.add(cs);
+                        }
                     }
                 }
                 parserEvent=parser.next();
@@ -203,6 +211,7 @@ public class Stations {
             throw new RuntimeException(e);
         }
 
-
+       return list;
     }
+
 }
