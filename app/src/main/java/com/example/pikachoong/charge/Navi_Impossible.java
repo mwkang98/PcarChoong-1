@@ -118,6 +118,7 @@ public class Navi_Impossible extends AppCompatActivity implements TMapGpsManager
                     System.out.println("spinner->"+list[0]);
                     System.out.println("spinner->"+list[1]);
                     System.out.println("spinner->"+list[2]);
+                        //민우안녕
                 }
                 catch (IOException e) {
                     throw new RuntimeException(e);
